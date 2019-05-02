@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,13 +52,27 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    int size = 30;
+    private EditText name ,height ,weight;
+    private TextView BMI;
+    float bmi;
 
-    public void Click(View view) {
+    public void Go(View view) {
 
-        TextView text = findViewById(R.id.textView);
-        text.setTextSize(++size);
+        name = findViewById(R.id.name);
+        height = findViewById(R.id.height);
+        weight = findViewById(R.id.weight);
+        BMI = findViewById(R.id.BMI);
 
+        bmi = Float.parseFloat(weight.getText().toString())/Float.parseFloat(height.getText().toString())/Float.parseFloat(height.getText().toString());
+
+        BMI.setText("your BMI is" + bmi);
+
+        if(bmi < 18.5)
+            getWindow().setBackgroundDrawableResource(R.drawable.fly);
+        else if(bmi > 25)
+            getWindow().setBackgroundDrawableResource(R.drawable.rip);
+        else
+            getWindow().setBackgroundDrawableResource(R.drawable.good);
 
     }
 }
